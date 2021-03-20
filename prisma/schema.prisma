@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:dev.db"
+  // url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            Int      @id @default(autoincrement())
+  username      String
+  name          String
+  lastName      String
+  email         String
+  role          Role[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  createdBy     Int
+  updatedBy     Int
+  createdByUser User     @relation("userCreatedBy", fields: [createdBy], references: [id])
+  updatedByUser User     @relation("userUpdatedBy", fields: [updatedBy], references: [id])
+
+  bankCreatedBy Bank[] @relation("bankCreatedBy")
+  bankUpdatedBy Bank[] @relation("bankUpdatedBy")
+  userCreatedBy User[] @relation("userCreatedBy")
+  userUpdatedBy User[] @relation("userUpdatedBy")
+}
+
+model Role {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  user User[]
+}
+
+model Bank {
+  id            Int      @id @default(autoincrement())
+  address       String
+  name          String
+  accountNumber String?
+  swift         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  createdBy     Int
+  updatedBy     Int
+  createdByUser User     @relation("bankCreatedBy", fields: [createdBy], references: [id])
+  updatedByUser User     @relation("bankUpdatedBy", fields: [createdBy], references: [id])
+}
