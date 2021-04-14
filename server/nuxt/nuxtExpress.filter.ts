@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { Nuxt } from 'nuxt';
 
-@Catch()
+// @Catch(HttpException)
 export class NuxtFilter implements ExceptionFilter {
   private readonly nuxt: Nuxt;
 
@@ -14,25 +14,27 @@ export class NuxtFilter implements ExceptionFilter {
     this.nuxt = nuxt;
   }
 
-  public async catch(
+  public async catch (
     exception: HttpException,
     host: ArgumentsHost,
   ): Promise<void> {
     const ctx = host.switchToHttp();
     const res = ctx.getResponse();
     const req = ctx.getRequest();
+    // console.log(exception)
     const status = exception.getStatus();
 
     if (status === 404) {
       if (!res.headersSent) {
         await this.nuxt.render(req, res);
       }
-    } else {
-      res.status(status).json({
-        statusCode: status,
-        timestamp: new Date().toISOString(),
-        path: req.url,
-      });
-    }
+    } //else {
+    //   res.status(status).json(exception.message)
+    //   // res.status(status).json({
+    //   //   statusCode: status,
+    //   //   timestamp: new Date().toISOString(),
+    //   //   path: req.url,
+    //   // });
+    // }
   }
 }

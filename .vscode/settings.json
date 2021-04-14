@@ -1,13 +1,28 @@
 {
-    // "eslint.format.enable": true,
     "eslint.validate": [
         "javascript",
         "typescript",
         "html",
         "vue"
     ],
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
+    "eslint.format.enable": true,
+    // "editor.codeActionsOnSave": {
+    //     "source.fixAll.eslint": true
+    // },
+    "vetur.format.defaultFormatter.ts": "vscode-typescript",
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "yarn.lock": true,
+        ".eslintcache": true,
+        "**/.prettierrc": true,
+        "**/.gitignore": true
     },
-    "editor.formatOnSave": true,
+    "workbench.editor.highlightModifiedTabs": true,
+    "material-icon-theme.activeIconPack": "nest",
+    "workbench.tree.expandMode": "doubleClick",
+    "vetur.experimental.templateInterpolationService": true
 }

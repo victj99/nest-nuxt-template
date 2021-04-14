@@ -6,7 +6,11 @@ import { Role, Prisma } from '@prisma/client'
 export class RoleService {
     constructor(private prisma: PrismaService) { }
 
-    async role(roleWhereUniqueInput: Prisma.RoleWhereUniqueInput): Promise<Role | null> {
+    async getAllBy(roleWhereUniqueInput: Prisma.RoleWhereUniqueInput): Promise<Role | null> {
+        return this.prisma.role.findUnique({ where: roleWhereUniqueInput });
+    }
+
+    async getOneById(roleWhereUniqueInput: Prisma.RoleWhereUniqueInput): Promise<Role | null> {
         return this.prisma.role.findUnique({ where: roleWhereUniqueInput });
     }
 }

@@ -8,7 +8,7 @@ export class NuxtServer {
   private static instance: NuxtServer;
   public nuxt: Nuxt;
 
-  public async run(isDev: boolean = true): Promise<Nuxt> {
+  public async run (isDev = true): Promise<Nuxt> {
     const nuxt = new Nuxt(config);
     await nuxt.ready();
 
@@ -31,7 +31,7 @@ export class NuxtServer {
     return this.init(nuxt);
   }
 
-  public static getInstance(): NuxtServer {
+  public static getInstance (): NuxtServer {
     if (!this.instance) {
       this.instance = new NuxtServer();
     }
@@ -39,14 +39,14 @@ export class NuxtServer {
     return this.instance;
   }
 
-  private init(nuxt: Nuxt): Nuxt {
+  private init (nuxt: Nuxt): Nuxt {
     nuxt.hook('render:route', (url) => {
       log.debug(`path called ${url}`)
     });
 
     nuxt.hook('render:errorMiddleware', (app) =>
       app.use((err, next) => {
-        log.error(err.message, err.stack);
+        log.error(err.message);
         next(err);
       }),
     );
@@ -54,7 +54,7 @@ export class NuxtServer {
     return nuxt;
   }
 
-  async close(): Promise<void> {
+  async close (): Promise<void> {
     if (this.nuxt) {
       await this.nuxt.close();
     }

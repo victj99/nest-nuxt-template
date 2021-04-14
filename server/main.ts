@@ -1,20 +1,28 @@
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory, } from '@nestjs/core';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { NuxtServer } from './nuxt';
-import { NuxtFilter } from './nuxt/nuxtExpress.filter';
 
 const isDev = process.env.NODE_ENV !== 'production'
 
-declare const module: any;
+// declare const module: any;
 
-async function bootstrap() {
+async function bootstrap () {
+  const baseUrl = 'api'
   const nuxt = await NuxtServer.getInstance().run(isDev);
-
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix(baseUrl)
 
-  app.useGlobalFilters(new NuxtFilter(nuxt));
+  const config = new DocumentBuilder().setTitle('Nest API').setVersion('1.0').build()
+  const document = SwaggerModule.createDocument(app, config)
 
-  app.setGlobalPrefix('/api')
+  SwaggerModule.setup('api/docs', app, document)
+  app.useGlobalPipes(new ValidationPipe({ transform: true, transformOptions: { enableImplicitConversion: true } }))
+
+  const nuxtRender = (req, res, next) => { if (req.url.startsWith('/api')) next(); else nuxt.render(req, res) }
+  app.use(nuxtRender)
+
   app.listen(3000);
 }
 bootstrap();

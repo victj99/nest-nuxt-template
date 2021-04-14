@@ -12,11 +12,14 @@
     "baseUrl": "./",
     "incremental": true,
     "paths": {
+      "~/*": [
+        "client/*"
+      ],
+      "@/*": [
+        "client/*"
+      ],
       "@server/*": [
         "server/*"
-      ],
-      "@client/*": [
-        "client/*"
       ],
       "@common/*": [
         "common/*"
@@ -26,5 +29,9 @@
   "types": [
     "@types/node",
     "@nuxt/types"
-  ]
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
 }

@@ -48,5 +48,5 @@ model Bank {
   createdBy     Int
   updatedBy     Int
   createdByUser User     @relation("bankCreatedBy", fields: [createdBy], references: [id])
-  updatedByUser User     @relation("bankUpdatedBy", fields: [createdBy], references: [id])
+  updatedByUser User     @relation("bankUpdatedBy", fields: [updatedBy], references: [id])
 }
