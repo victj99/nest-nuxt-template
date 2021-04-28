@@ -37,6 +37,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.6",
+    "@nuxtjs/vuetify": "^1.11.3",
     "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
@@ -47,7 +48,6 @@
     "@nuxt/typescript-build": "^2.0.4",
     "@nuxtjs/eslint-config-typescript": "^5.0.0",
     "@nuxtjs/eslint-module": "^3.0.2",
-    "@nuxtjs/vuetify": "^1.11.3",
     "@types/express": "^4.17.11",
     "@types/fs-extra": "^9.0.11",
     "@types/jest": "^26.0.20",
