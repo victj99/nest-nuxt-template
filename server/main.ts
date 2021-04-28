@@ -23,6 +23,6 @@ async function bootstrap () {
   const nuxtRender = (req, res, next) => { if (req.url.startsWith('/api')) next(); else nuxt.render(req, res) }
   app.use(nuxtRender)
 
-  app.listen(3000);
+  app.listen(process.env.PORT || 3000);
 }
 bootstrap();
