@@ -1,2 +1,2 @@
-web: yarn start:nuxt-prod
+web: yarn start:prod
 release: npx prisma migrate deploy
