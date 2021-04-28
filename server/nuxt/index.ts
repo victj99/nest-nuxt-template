@@ -14,7 +14,7 @@ export class NuxtServer {
 
     // Build only in dev mode
     if (isDev) {
-      log.debug('building');
+      log.debug('building for dev');
       const builder = new Builder(nuxt);
       const res = await builder.build();
       this.nuxt = res.nuxt;
@@ -23,11 +23,11 @@ export class NuxtServer {
     }
 
     if (this.nuxt) {
-      log.debug('reusing');
+      log.debug('reusing existing nuxt');
       return this.nuxt;
     }
 
-    log.debug('fresh instance');
+    log.debug('fresh instance of nuxt');
     return this.init(nuxt);
   }
 
