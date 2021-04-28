@@ -7,7 +7,7 @@ export class RoleController {
 
     constructor(private readonly roleService: RoleService) { }
 
-    // @Get('buscar')
+    // @Get('search')
     // async getAllBy(@Query() query): Promise<Role> {
     //     return this.roleService.getAllBy({ id: id });
     // }
